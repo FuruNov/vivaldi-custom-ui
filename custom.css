@@ -1,0 +1,189 @@
+/* タイトルバーの削除 */
+
+.win #header {
+	min-height: auto;
+}
+
+:not(.address-top).tabs-off #titlebar,
+:not(.address-top).tabs-left #titlebar,
+:not(.address-top).tabs-right #titlebar,
+:not(.address-top).tabs-bottom #titlebar {
+	display: none;
+}
+
+.tabs-top #titlebar {
+	display: block;
+}
+
+#browser.win.fullscreen #titlebar {
+	display: block;
+}
+
+/*  */
+/* パネル・バーの透明化 */
+
+/*ツールバー*/
+.color-behind-tabs-off,
+.toolbar-mainbar,
+/* ブックマークバー */
+.bookmark-bar,
+.color-behind-tabs-off .bookmark-bar button,
+.color-behind-tabs-on .bookmark-bar,
+.color-behind-tabs-on .bookmark-bar button,
+/*垂直タブにしている時のヘッダー*/
+#browser:not(.tabs-top) #header,
+/* スタートページ */
+.startpage .startpage-navigation {
+	background: transparent !important;
+	border: none;
+	backdrop-filter: blur(2px);
+}
+
+/* アドレスバー */
+.UrlBar,
+.UrlBar-AddressField {
+	opacity: 1;
+}
+
+/*タブバー*/
+div#tabs-tabbar-container {
+	background: rgba(0, 0, 0, 0.75) !important;
+	border: none;
+	backdrop-filter: blur(2px);
+}
+
+/*パネルの影*/
+.panel-group {
+	box-shadow: none !important;
+}
+
+/*タブバーの影*/
+#tabs-tabbar-container {
+	border: none !important;
+}
+
+/*ステータスバー*/
+:not(.tabs-bottom)#browser > footer {
+	background: transparent !important;
+	box-shadow: none;
+}
+
+/*アドレスバーを下配置にしている場合の境界線削除*/
+.address-bottom .toolbar-mainbar {
+	box-shadow: none;
+}
+
+/*  */
+/* ウェブパネルのヘッダを削除 */
+#panels .webpanel-stack .webpanel header.webpanel-header {
+	display: none;
+}
+
+/* パネルの左余白 */
+#switch {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+}
+
+#panels-container {
+	background: rgba(0, 0, 0, 0.5);
+	border: none;
+	backdrop-filter: blur(5px);
+	transition: 0.15s ease-out 0.1s !important;
+}
+
+#panels-container:not(:focus-within) {
+	background: rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(0px);
+	transition: 0.15s ease-out 0.1s !important;
+}
+
+/* マウスオーバーでChrome拡張機能を展開 */
+/* .toolbar-extensions:not(:hover):not(:focus-within) .ExtensionIcon {
+	display: none;
+} */
+
+/* Automate Floating Vertical Tabbar for Mouse & Keyboard */
+#tabs-tabbar-container:is(.left, .right) {
+	box-shadow: rgba(0, 0, 0, 0.5) 0 0 2px, rgb(0 0 0 / 25%) 0px 3px 6px;
+}
+
+#tabs-tabbar-container.left,
+#tabs-tabbar-container.right {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	z-index: 9;
+	clip-path: inset(0 -50px 0 -50px);
+	transition: 0.15s ease-out 0.1s !important;
+}
+#tabs-tabbar-container.left {
+	left: 0;
+}
+#tabs-tabbar-container.right {
+	right: -1px;
+}
+
+#tabs-tabbar-container.left:not(:focus-within):not(:hover) {
+	clip-path: inset(0% calc(100% - 30px) 0% 0%);
+	transition: 0.15s ease-out 0.5s !important;
+	opacity: 0;
+}
+#tabs-tabbar-container.right:not(:focus-within):not(:hover) {
+	transform: translateX(calc(100% - 32px));
+	transition: 0.15s ease-out 0.5s !important;
+}
+
+#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover)
+	> div.overflow
+	.tab-strip {
+	animation: ofh 0s 0.5s forwards !important;
+}
+@keyframes ofh {
+	to {
+		overflow-y: hidden;
+	}
+}
+
+/* newtab position */
+#tabs-tabbar-container:is(.left, .right) .newtab {
+	left: 0 !important;
+	width: 100%;
+	transition: width 0.1s 0.1s !important;
+}
+#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover)
+	.newtab {
+	width: 30px;
+	transition: width 0s 0.5s !important;
+}
+
+/* reserved outter space for minimized tabbar by push everything inward */
+#browser:not(.fullscreen).tabs-left #main {
+	margin-left: 0px;
+}
+#browser:not(.fullscreen).tabs-right #main {
+	margin-right: 0px;
+}
+
+/* Option 1: minimize into parent column */
+#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) {
+	flex-direction: row;
+}
+/* Option 2: minimize into child column */
+/* #tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) {
+	flex-direction: row-reverse;
+} */
+
+/* Quick Commands Peekaboo v2 */
+/* Compact QC */
+#modal-bg.qc-modal.float.top:not(:hover)
+	.quick-command-container
+	.quick-commands {
+	opacity: 0;
+	display: none;
+}
+#modal-bg.qc-modal.float.top:not(:hover) > div,
+#modal-bg.qc-modal.float.top:not(:hover) .qc-entry input {
+	opacity: 0;
+	transition: 0.15s ease-out 0.1s !important;
+}
